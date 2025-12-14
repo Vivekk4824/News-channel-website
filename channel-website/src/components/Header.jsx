@@ -7,9 +7,11 @@ const Header = () => {
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
           {/* Left: Logo */}
-          <h1 className="text-2xl font-bold text-red-600">
-            Star 24 Fast News
-          </h1>
+          <img 
+            src="/assets/logo.png"
+            alt="News Channel Logo"
+            className="h-10 cursor-pointer md:h-15 md:width-30 "
+          />
 
           {/* Center: Navigation */}
           <nav className="hidden md:flex gap-6 text-sm font-medium text-gray-700">
