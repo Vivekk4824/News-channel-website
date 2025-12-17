@@ -10,27 +10,36 @@ const Homepage = () => {
         </div>
       </section>
 
-      {/* 🌟 HERO / CHANNEL INTRO (CENTERED & STRONG) */}
-      <section className="bg-white border-b">
+      {/* 🌟 HERO SECTION */}
+      <section className="bg-white border-b border-blue-200">
         <div className="max-w-6xl mx-auto px-6 py-16 text-center">
 
           <motion.h1
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4"
+            className="text-4xl md:text-5xl font-extrabold text-blue-900 mb-4"
           >
-            Star 24 Fast News
+            Star <span className="text-red-600">24</span> Fast News
           </motion.h1>
+
+          {/* Yellow Accent Line */}
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: "140px" }}
+            transition={{ duration: 0.6 }}
+            className="h-1 bg-yellow-400 mx-auto mb-6 rounded"
+          />
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-lg text-gray-600 max-w-3xl mx-auto mb-6"
+            className="text-lg text-gray-700 max-w-3xl mx-auto mb-6"
           >
-            Your trusted news channel delivering fast, accurate, and
-            reliable updates from <span className="font-semibold">Nashik</span>,
+            Your trusted local news channel delivering fast, accurate, and
+            reliable updates from{" "}
+            <span className="font-semibold text-blue-800">Nashik</span>,
             Maharashtra, India, and across the world.
           </motion.p>
 
@@ -38,62 +47,66 @@ const Homepage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            className="text-sm text-gray-500 max-w-2xl mx-auto mb-10"
+            className="text-sm text-gray-600 max-w-2xl mx-auto mb-10"
           >
             Covering breaking news, politics, crime, education, sports,
-            technology, and important local events — 24×7 journalism you can trust.
+            technology, and important local events —{" "}
+            <span className="text-red-600 font-semibold">
+              24×7 journalism
+            </span>{" "}
+            you can trust.
           </motion.p>
 
-          {/* Stats */}
+          {/* 📊 STATS */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.6 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
           >
-            <div className="bg-gray-100 rounded-lg py-4">
-              <p className="text-2xl font-bold text-red-600">24×7</p>
-              <p className="text-sm text-gray-600">News Coverage</p>
+            <div className="bg-blue-50 border-t-4 border-blue-600 rounded-lg py-4">
+              <p className="text-2xl font-bold text-blue-900">24×7</p>
+              <p className="text-sm text-gray-700">News Coverage</p>
             </div>
 
-            <div className="bg-gray-100 rounded-lg py-4">
-              <p className="text-2xl font-bold text-red-600">100+</p>
-              <p className="text-sm text-gray-600">Local Stories</p>
+            <div className="bg-yellow-50 border-t-4 border-yellow-400 rounded-lg py-4">
+              <p className="text-2xl font-bold text-yellow-600">100+</p>
+              <p className="text-sm text-gray-700">Local Stories</p>
             </div>
 
-            <div className="bg-gray-100 rounded-lg py-4">
-              <p className="text-2xl font-bold text-red-600">Trusted</p>
-              <p className="text-sm text-gray-600">Journalism</p>
+            <div className="bg-red-50 border-t-4 border-red-600 rounded-lg py-4">
+              <p className="text-2xl font-bold text-red-700">Trusted</p>
+              <p className="text-sm text-gray-700">Journalism</p>
             </div>
 
-            <div className="bg-gray-100 rounded-lg py-4">
-              <p className="text-2xl font-bold text-red-600">Fast</p>
-              <p className="text-sm text-gray-600">Live Updates</p>
+            <div className="bg-blue-50 border-t-4 border-blue-600 rounded-lg py-4">
+              <p className="text-2xl font-bold text-blue-900">Fast</p>
+              <p className="text-sm text-gray-700">Live Updates</p>
             </div>
           </motion.div>
 
         </div>
       </section> 
 
-      {/* 📰 HEADLINES */}
-      <section className="px-6 py-10 max-w-6xl mx-auto">
-        <h2 className="text-2xl font-bold mb-6">
+      {/* 📰 LATEST HEADLINES */}
+      <section className="px-6 py-12 max-w-6xl mx-auto">
+        <h2 className="text-2xl font-bold text-blue-900 mb-6">
           Latest Headlines
         </h2>
 
         <div className="grid gap-6 md:grid-cols-2">
 
-          {/* Headline 1 */}
+          {/* Breaking */}
           <motion.article
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
             className="bg-white p-6 rounded-lg shadow"
           >
-            <span className="inline-block mb-2 text-xs font-semibold text-red-600 uppercase">
+            <span className="inline-block mb-2 text-xs font-semibold text-red-700 bg-red-100 px-2 py-1 rounded uppercase">
               Breaking
             </span>
-            <h3 className="text-lg font-bold mb-2">
+            <h3 className="text-lg font-bold mb-2 text-gray-900">
               Heavy Rainfall Disrupts Traffic in Nashik
             </h3>
             <p className="text-gray-600">
@@ -101,17 +114,17 @@ const Homepage = () => {
             </p>
           </motion.article>
 
-          {/* Headline 2 */}
+          {/* Politics */}
           <motion.article
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="bg-white p-6 rounded-lg shadow"
           >
-            <span className="inline-block mb-2 text-xs font-semibold text-purple-600 uppercase">
+            <span className="inline-block mb-2 text-xs font-semibold text-blue-700 bg-blue-100 px-2 py-1 rounded uppercase">
               Politics
             </span>
-            <h3 className="text-lg font-bold mb-2">
+            <h3 className="text-lg font-bold mb-2 text-gray-900">
               Local Leaders Hold Meeting Ahead of Elections
             </h3>
             <p className="text-gray-600">
@@ -119,17 +132,17 @@ const Homepage = () => {
             </p>
           </motion.article>
 
-          {/* Headline 3 */}
+          {/* Education */}
           <motion.article
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="bg-white p-6 rounded-lg shadow"
           >
-            <span className="inline-block mb-2 text-xs font-semibold text-blue-600 uppercase">
+            <span className="inline-block mb-2 text-xs font-semibold text-yellow-700 bg-yellow-100 px-2 py-1 rounded uppercase">
               Education
             </span>
-            <h3 className="text-lg font-bold mb-2">
+            <h3 className="text-lg font-bold mb-2 text-gray-900">
               Education Department Releases New Academic Guidelines
             </h3>
             <p className="text-gray-600">
@@ -137,17 +150,17 @@ const Homepage = () => {
             </p>
           </motion.article>
 
-          {/* Headline 4 */}
+          {/* Events */}
           <motion.article
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
             className="bg-white p-6 rounded-lg shadow"
           >
-            <span className="inline-block mb-2 text-xs font-semibold text-green-600 uppercase">
+            <span className="inline-block mb-2 text-xs font-semibold text-green-700 bg-green-100 px-2 py-1 rounded uppercase">
               Events
             </span>
-            <h3 className="text-lg font-bold mb-2">
+            <h3 className="text-lg font-bold mb-2 text-gray-900">
               Cultural Festival Attracts Large Crowd in Nashik
             </h3>
             <p className="text-gray-600">
@@ -155,17 +168,17 @@ const Homepage = () => {
             </p>
           </motion.article>
 
-          {/* Headline 5 */}
+          {/* Technology */}
           <motion.article
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="bg-white p-6 rounded-lg shadow"
           >
-            <span className="inline-block mb-2 text-xs font-semibold text-indigo-600 uppercase">
+            <span className="inline-block mb-2 text-xs font-semibold text-indigo-700 bg-indigo-100 px-2 py-1 rounded uppercase">
               Technology
             </span>
-            <h3 className="text-lg font-bold mb-2">
+            <h3 className="text-lg font-bold mb-2 text-gray-900">
               Nashik Startup Launches AI-Based Farming App
             </h3>
             <p className="text-gray-600">
@@ -173,17 +186,17 @@ const Homepage = () => {
             </p>
           </motion.article>
 
-          {/* Headline 6 */}
+          {/* Sports */}
           <motion.article
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9 }}
             className="bg-white p-6 rounded-lg shadow"
           >
-            <span className="inline-block mb-2 text-xs font-semibold text-orange-600 uppercase">
+            <span className="inline-block mb-2 text-xs font-semibold text-orange-700 bg-orange-100 px-2 py-1 rounded uppercase">
               Sports
             </span>
-            <h3 className="text-lg font-bold mb-2">
+            <h3 className="text-lg font-bold mb-2 text-gray-900">
               District-Level Cricket Tournament Begins Today
             </h3>
             <p className="text-gray-600">
