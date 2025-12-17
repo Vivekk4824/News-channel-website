@@ -1,8 +1,14 @@
 import { motion } from "framer-motion";
+import PostingSection from "../components/PostingSection";
 
 const Homepage = () => {
   return (
     <main className="flex-1 bg-gray-100">
+      <section className="posting-section">
+        <div className="max-w-7xl mx-auto px-4 py-6 ">
+          <PostingSection />
+        </div>
+      </section>
 
       {/* 🌟 HERO / CHANNEL INTRO (CENTERED & STRONG) */}
       <section className="bg-white border-b">
@@ -23,7 +29,7 @@ const Homepage = () => {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="text-lg text-gray-600 max-w-3xl mx-auto mb-6"
           >
-            Your trusted local news channel delivering fast, accurate, and
+            Your trusted news channel delivering fast, accurate, and
             reliable updates from <span className="font-semibold">Nashik</span>,
             Maharashtra, India, and across the world.
           </motion.p>
@@ -67,7 +73,7 @@ const Homepage = () => {
           </motion.div>
 
         </div>
-      </section>
+      </section> 
 
       {/* 📰 HEADLINES */}
       <section className="px-6 py-10 max-w-6xl mx-auto">

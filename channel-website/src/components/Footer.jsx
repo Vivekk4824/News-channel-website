@@ -10,7 +10,7 @@ const Footer = () => {
             Star 24 Fast News
           </h3>
           <p className="text-sm text-gray-400">
-            Star 24 Fast News is a local news channel dedicated to delivering
+            Star 24 Fast News is a news channel dedicated to delivering
             fast, accurate, and reliable news from Nashik, Maharashtra, India,
             and beyond.
           </p>
@@ -43,6 +43,17 @@ const Footer = () => {
           <h4 className="text-white font-semibold mb-3">Contact</h4>
           <p className="text-sm text-gray-400">
             Email: support@star24news.com
+          </p>
+          <p className="text-sm text-gray-400">
+            Nashik, Maharashtra
+          </p>
+        </div>
+
+        {/* Socials */}
+        <div>
+          <h4 className="text-white font-semibold mb-3">Contact</h4>
+          <p className="text-sm text-gray-400">
+            
           </p>
           <p className="text-sm text-gray-400">
             Nashik, Maharashtra

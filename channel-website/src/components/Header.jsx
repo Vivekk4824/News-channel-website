@@ -79,7 +79,7 @@ const Header = () => {
       </div>
 
       {/* 🔴 Breaking News Bar */}
-      <div className="bg-red-600 text-white overflow-hidden">
+      <div className="bg-red-700 text-white overflow-hidden">
         <div className="animate-marquee-slow whitespace-nowrap py-2 font-semibold">
           🔴 Breaking News: Nashik rain alert • City traffic update • Local elections • Sports highlights • Education news
         </div>
