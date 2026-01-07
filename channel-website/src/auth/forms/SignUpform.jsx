@@ -6,6 +6,7 @@ import { Mail, Lock, Eye, EyeOff, ArrowLeft, User } from "lucide-react";
 const SignUpform = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -16,10 +17,41 @@ const SignUpform = () => {
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    navigate("/sign-in");
-  };
+  // ✅ REAL SIGNUP HANDLER (no error UI)
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+
+  try {
+    const res = await fetch("http://localhost:3100/api/auth/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        username: formData.name,
+        email: formData.email,
+        password: formData.password,
+      }),
+    });
+
+    const data = await res.json();
+    console.log("Signup result:", res.status, data);
+
+    if (!res.ok) {
+      alert(data.message || "Signup failed");
+      return;
+    }
+
+    // ✅ correct homepage route
+    navigate("/");
+
+  } catch (err) {
+    console.log("Signup error:", err);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <motion.div
@@ -103,9 +135,10 @@ const SignUpform = () => {
 
         <button
           type="submit"
-          className="w-full bg-red-600 text-white py-3 rounded-lg text-lg font-bold hover:bg-red-700 transition"
+          disabled={loading}
+          className="w-full bg-red-600 text-white py-3 rounded-lg text-lg font-bold hover:bg-red-700 transition disabled:opacity-60"
         >
-          Create Account
+          {loading ? "Creating Account..." : "Create Account"}
         </button>
       </form>
 
