@@ -1,21 +1,36 @@
-import { createContext, useState, useContext } from "react";
-import en from "../i18n/en.json";
-import mr from "../i18n/mr.json";
+import { createContext, useContext, useState } from "react";
 
-const LanguageContext = createContext();
+const LangContext = createContext();
 
-const translations = { en, mr };
+export const useLang = () => useContext(LangContext);
 
-export const LanguageProvider = ({ children }) => {
+export const LangProvider = ({ children }) => {
   const [lang, setLang] = useState("en");
 
-  const t = (key) => translations[lang][key] || key;
+  async function translate(text) {
+    if (lang === "en") return text;
+
+    try {
+      const res = await fetch("http://localhost:3100/api/translate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          text,
+          targetLang: "Marathi"
+        })
+      });
+
+      const data = await res.json();
+      return data.translated;
+    } catch (err) {
+      console.error("Translation failed", err);
+      return text;
+    }
+  }
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang, t }}>
+    <LangContext.Provider value={{ lang, setLang, translate }}>
       {children}
-    </LanguageContext.Provider>
+    </LangContext.Provider>
   );
 };
-
-export const useLang = () => useContext(LanguageContext);
