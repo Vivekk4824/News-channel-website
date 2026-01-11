@@ -4,22 +4,19 @@ const LanguageSwitcher = () => {
   const { lang, setLang } = useLang();
 
   return (
-    <div className="flex gap-2">
+    <div className="lang-switch">
       <button
-        className={`px-3 py-1 rounded border ${
-          lang === "en" ? "bg-red-600 text-white" : "text-gray-700"
-        }`}
+        className={lang === "en" ? "lang-btn active" : "lang-btn"}
         onClick={() => setLang("en")}
       >
         EN
       </button>
+
       <button
-        className={`px-3 py-1 rounded border ${
-          lang === "mr" ? "bg-red-600 text-white" : "text-gray-700"
-        }`}
+        className={lang === "mr" ? "lang-btn active" : "lang-btn"}
         onClick={() => setLang("mr")}
       >
-        MR
+        मराठी
       </button>
     </div>
   );

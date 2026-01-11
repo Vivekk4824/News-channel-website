@@ -96,50 +96,79 @@ const hero =
     
 
   return (
-    <main className="flex-1 bg-gray-100">
+   <main className="flex-1 bg-(--bg-main)">
+
+
 
       
 
 {/* 🌟 HERO SECTION */}
-<section className="bg-white border-b border-blue-200">
-  <div className="max-w-6xl mx-auto px-6 py-16 text-center">
+<section className="hero-section">
+  <div className="hero-overlay"></div>
 
+  <div className="hero-content">
     <motion.h1
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.6 }}
-      className="text-4xl md:text-5xl font-extrabold text-blue-900 mb-4"
+      className="hero-title"
     >
       {hero.title}
     </motion.h1>
 
-    <motion.div
-      initial={{ width: 0 }}
-      animate={{ width: "140px" }}
-      transition={{ duration: 0.6 }}
-      className="h-1 bg-yellow-400 mx-auto mb-6 rounded"
-    />
+    <div className="hero-divider"></div>
 
-    <motion.p
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.2, duration: 0.6 }}
-      className="text-lg text-gray-700 max-w-3xl mx-auto mb-6"
-    >
-      {hero.desc1}
-    </motion.p>
+    <p className="hero-desc">{hero.desc1}</p>
+    <p className="hero-desc mt-3">{hero.desc2}</p>
 
-    <motion.p
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.4, duration: 0.6 }}
-      className="text-sm text-gray-600 max-w-2xl mx-auto mb-10"
-    >
-      {hero.desc2}
-    </motion.p>
+    <div className="hero-actions">
+  <button className="news-btn latest-btn">
+    📰 Latest News
+  </button>
+
+  <button className="news-btn live-btn">
+    🔴 Watch Live
+  </button>
+</div>
+
+
+    <div className="hero-headlines">
+  <div>🌧 Heavy rain alert in Nashik</div>
+  <div>🗳 Municipal elections preparation</div>
+  <div>🏏 Youth sports championship today</div>
+</div>
+
+
+<div className="hero-featured">
+
+  <div className="featured-card">
+    <span>FEATURED</span>
+    <h3>IMD issues Yellow Alert for Nashik</h3>
+    <p>Continuous rainfall expected for next 48 hours. Authorities advise citizens to stay alert.</p>
+  </div>
+
+  <div className="featured-card">
+    <span>POLITICS</span>
+    <h3>Municipal elections preparation begins</h3>
+    <p>Local leaders meet as city prepares for upcoming civic body elections.</p>
+  </div>
+
+  <div className="featured-card">
+    <span>SPORTS</span>
+    <h3>Youth cricket tournament kicks off</h3>
+    <p>Young athletes from across Maharashtra participate in opening matches.</p>
+  </div>
+
+</div>
+
 
   </div>
 </section>
+
+
+
+
+
 
 
       {/* 📰 LATEST HEADLINES */}
@@ -199,7 +228,7 @@ const hero =
               <VideoCard video={video} />
             </motion.a>
           ))}
-
+     
         </div>
 
       </section>

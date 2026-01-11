@@ -18,11 +18,16 @@ const BreakingNews = () => {
       ];
 
   return (
-    <div className="bg-red-700 text-white overflow-hidden">
-      <div className="animate-marquee-slow whitespace-nowrap py-2 font-semibold">
+    <div className="breaking-bar">
+      <span className="breaking-label">
+        {lang === "mr" ? "ब्रेकिंग" : "BREAKING"}
+      </span>
+
+      <div className="animate-marquee-slow px-6">
         {news.map((headline, i) => (
-          <span key={i} className="mx-6">
-            🔴 {headline}
+          <span key={i} className="mr-12 inline-flex items-center gap-2">
+            <span className="text-yellow-300">●</span>
+            {headline}
           </span>
         ))}
       </div>
