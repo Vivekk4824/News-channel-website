@@ -2,6 +2,8 @@ import { Link, NavLink } from "react-router-dom";
 import { useLang } from "../context/LanguageContext";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useEffect, useState } from "react";
+import BreakingNews from "./BreakingNews";
+
 
 const Header = () => {
   const { lang } = useLang();
@@ -39,79 +41,69 @@ const Header = () => {
   }, [lang]);
 
   return (
-    <header className="w-full">
+  <header className="w-full">
 
-      {/* Navbar */}
-      <div className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    {/* 🔵 TOP NAVBAR */}
+    <div className="news-header">
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-start gap-16">
 
-          {/* Logo */}
-          <Link to="/">
-            <img
-              src="/assets/logo.png"
-              alt="News Channel Logo"
-              className="h-10 cursor-pointer md:h-15 md:w-30"
-            />
+
+        {/* Logo */}
+        <Link to="/" className="news-logo">
+          STAR <span>24</span>  FAST NEWS
+        </Link>
+
+        {/* Navigation */}
+        <nav className="hidden md:flex gap-8 text-white font-semibold text-sm">
+          <NavLink to="/" className={({ isActive }) =>
+            isActive ? "text-yellow-400" : "hover:text-yellow-400"
+          }>
+            {nav.home}
+          </NavLink>
+
+          <NavLink to="/india" className={({ isActive }) =>
+            isActive ? "text-yellow-400" : "hover:text-yellow-400"
+          }>
+            {nav.india}
+          </NavLink>
+
+          <NavLink to="/world" className={({ isActive }) =>
+            isActive ? "text-yellow-400" : "hover:text-yellow-400"
+          }>
+            {nav.world}
+          </NavLink>
+
+          <NavLink to="/sports" className={({ isActive }) =>
+            isActive ? "text-yellow-400" : "hover:text-yellow-400"
+          }>
+            {nav.sports}
+          </NavLink>
+        </nav>
+
+        {/* Right side */}
+        <div className="flex items-center gap-4">
+          <LanguageSwitcher />
+
+          <Link to="/sign-in" className="news-btn bg-white text-blue-900">
+            {nav.login}
           </Link>
 
-          {/* Navigation */}
-          <nav className="hidden md:flex gap-6 text-sm font-medium text-gray-700">
-            <NavLink to="/" className={({ isActive }) =>
-              isActive ? "text-red-600 font-semibold" : "hover:text-red-600"
-            }>
-              {nav.home}
-            </NavLink>
-
-            <NavLink to="/india" className={({ isActive }) =>
-              isActive ? "text-red-600 font-semibold" : "hover:text-red-600"
-            }>
-              {nav.india}
-            </NavLink>
-
-            <NavLink to="/world" className={({ isActive }) =>
-              isActive ? "text-red-600 font-semibold" : "hover:text-red-600"
-            }>
-              {nav.world}
-            </NavLink>
-
-            <NavLink to="/sports" className={({ isActive }) =>
-              isActive ? "text-red-600 font-semibold" : "hover:text-red-600"
-            }>
-              {nav.sports}
-            </NavLink>
-          </nav>
-
-          {/* Right side */}
-          <div className="flex items-center gap-3">
-            <LanguageSwitcher />
-
-            <Link
-              to="/sign-in"
-              className="px-4 py-1.5 border border-red-600 text-red-600 rounded hover:bg-red-600 hover:text-white transition"
-            >
-              {nav.login}
-            </Link>
-
-            <Link
-              to="/sign-up"
-              className="px-4 py-1.5 bg-red-600 text-white rounded font-semibold hover:bg-red-700 transition"
-            >
-              {nav.signup}
-            </Link>
-          </div>
-
+          <Link to="/sign-up" className="news-btn bg-yellow-400 text-black">
+            {nav.signup}
+          </Link>
         </div>
-      </div>
 
-      {/* Breaking News */}
-      <div className="bg-red-700 text-white overflow-hidden">
-        <div className="animate-marquee-slow whitespace-nowrap py-2 font-semibold">
-          {nav.breaking}
-        </div>
       </div>
+    </div>
 
-    </header>
-  );
+    {/* 🔴 BREAKING NEWS BAR */}
+    <BreakingNews />
+
+
+  </header>
+);
+
+  
 };
 
 export default Header;

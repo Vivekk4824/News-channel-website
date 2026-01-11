@@ -1,7 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+@import "./styles/theme.css";
+@import "./styles/news.css";
 @import "tailwindcss";
 
 @keyframes marquee {

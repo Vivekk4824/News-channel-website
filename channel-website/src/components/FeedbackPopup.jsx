@@ -6,76 +6,72 @@ const FeedbackPopup = () => {
   const [rating, setRating] = useState(0);
 
   const handleSubmit = () => {
-    // simple JS logic (for now)
-    console.log("Feedback submitted:", {
-      rating,
-    });
+    console.log("Feedback submitted:", { rating });
     setOpen(false);
+    setRating(0);
   };
 
   return (
     <>
-      {/* Floating Button */}
+      {/* Floating Feedback Button */}
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-20 right-6 bg-red-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-red-700 transition"
+        className="feedback-btn"
       >
-        Feedback
+        💬 Feedback
       </button>
 
       {/* Popup */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            initial={{ opacity: 0, scale: 0.9, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="fixed bottom-28 right-6 w-80 bg-white rounded-lg shadow-xl z-50"
+            exit={{ opacity: 0, scale: 0.9, y: 30 }}
+            transition={{ duration: 0.3 }}
+            className="feedback-popup z-50"
           >
             {/* Header */}
-            <div className="flex justify-between items-center px-4 py-3 border-b">
-              <h3 className="font-semibold text-gray-800">
-                Send Feedback
-              </h3>
+            <div className="feedback-header">
+              <span>Send Feedback</span>
               <button
                 onClick={() => setOpen(false)}
-                className="text-gray-500 hover:text-gray-700"
+                className="text-white hover:text-yellow-300 text-lg"
               >
                 ✕
               </button>
             </div>
 
-            {/* Form */}
-            <div className="p-4 space-y-3">
+            {/* Body */}
+            <div className="feedback-body p-5 space-y-4">
+
               <input
                 type="text"
                 placeholder="Your Name"
-                className="w-full border rounded px-3 py-2 text-sm"
               />
 
               <input
                 type="email"
                 placeholder="Your Email"
-                className="w-full border rounded px-3 py-2 text-sm"
               />
 
               <textarea
                 placeholder="Your suggestion..."
                 rows="3"
-                className="w-full border rounded px-3 py-2 text-sm"
               />
 
               {/* Rating */}
               <div>
-                <p className="text-sm text-gray-600 mb-1">Rating</p>
-                <div className="flex space-x-1">
+                <p className="text-sm text-gray-600 mb-2 font-semibold">
+                  Rate our news quality
+                </p>
+
+                <div className="feedback-stars flex gap-2">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <span
                       key={star}
                       onClick={() => setRating(star)}
-                      className={`cursor-pointer text-xl ${
-                        star <= rating ? "text-yellow-400" : "text-gray-300"
-                      }`}
+                      className={star <= rating ? "text-yellow-400" : "text-gray-300"}
                     >
                       ★
                     </span>
@@ -85,10 +81,11 @@ const FeedbackPopup = () => {
 
               <button
                 onClick={handleSubmit}
-                className="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition"
+                className="feedback-submit"
               >
                 Submit Feedback
               </button>
+
             </div>
           </motion.div>
         )}

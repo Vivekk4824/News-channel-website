@@ -1,0 +1,49 @@
+:root {
+  --blue: #0b3c8a;
+  --red: #d62828;
+  --yellow: #f9c600;
+
+  --bg-main: #f9fafc;
+  --bg-card: #ffffff;
+
+  --text-dark: #1e293b;
+  --text-muted: #64748b;
+
+  --shadow-soft: 0 4px 20px rgba(0,0,0,0.06);
+
+  --font-heading: "Poppins", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+body {
+  background: var(--bg-main);
+  color: var(--text-dark);
+  font-family: var(--font-body);
+}
+
+h1,h2,h3,h4 {
+  font-family: var(--font-heading);
+  font-weight: 800;
+}
+
+:root {
+  --blue: #0b3c6f;
+  --yellow: #fbbf24;
+  --red: #dc2626;
+  --bg-main: #f8fafc;
+
+  /* Hero gradients */
+  --hero-gradient: linear-gradient(
+    135deg,
+    #e0f2fe 0%,
+    #ffffff 40%,
+    #fff7ed 70%,
+    #fef3c7 100%
+  );
+
+  --hero-overlay: linear-gradient(
+    90deg,
+    rgba(11, 60, 111, 0.85),
+    rgba(220, 38, 38, 0.8)
+  );
+}
