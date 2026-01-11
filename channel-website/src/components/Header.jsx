@@ -1,6 +1,16 @@
 import { Link, NavLink } from "react-router-dom";
+import { useLang } from "../context/LanguageContext";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Header = () => {
+  const { t, lang } = useLang();
+
+  // 🔹 Example bilingual breaking news headlines
+  const breakingNews =
+    lang === "mr"
+      ? "🔴 ब्रेकिंग न्यूज: नाशिक पावसाचा इशारा • शहरातील वाहतूक अपडेट • स्थानिक निवडणुका • क्रीडा बातम्या • शिक्षण क्षेत्रातील अपडेट"
+      : "🔴 Breaking News: Nashik rain alert • City traffic update • Local elections • Sports highlights • Education news";
+
   return (
     <header className="w-full">
 
@@ -10,7 +20,7 @@ const Header = () => {
 
           {/* Left: Logo */}
           <Link to="/">
-            <img 
+            <img
               src="/assets/logo.png"
               alt="News Channel Logo"
               className="h-10 cursor-pointer md:h-15 md:w-30"
@@ -26,7 +36,7 @@ const Header = () => {
                 isActive ? "text-red-600 font-semibold" : "hover:text-red-600"
               }
             >
-              Home
+              {t("home")}
             </NavLink>
 
             <NavLink
@@ -35,7 +45,7 @@ const Header = () => {
                 isActive ? "text-red-600 font-semibold" : "hover:text-red-600"
               }
             >
-              India
+              {t("india")}
             </NavLink>
 
             <NavLink
@@ -44,7 +54,7 @@ const Header = () => {
                 isActive ? "text-red-600 font-semibold" : "hover:text-red-600"
               }
             >
-              World
+              {t("world")}
             </NavLink>
 
             <NavLink
@@ -53,25 +63,31 @@ const Header = () => {
                 isActive ? "text-red-600 font-semibold" : "hover:text-red-600"
               }
             >
-              Sports
+              {t("sports")}
             </NavLink>
 
           </nav>
 
-          {/* Right: Login / Sign Up */}
-          <div className="flex gap-3">
+          {/* Right side — Language + Auth buttons */}
+          <div className="flex items-center gap-3">
+
+            {/* 🌍 Language Switch */}
+            <LanguageSwitcher />
+
+            {/* Login */}
             <Link
               to="/sign-in"
               className="px-4 py-1.5 border border-red-600 text-red-600 rounded hover:bg-red-600 hover:text-white transition"
             >
-              Login
+              {t("login") || "Login"}
             </Link>
 
+            {/* Sign Up */}
             <Link
               to="/sign-up"
               className="px-4 py-1.5 bg-red-600 text-white rounded font-semibold hover:bg-red-700 transition"
             >
-              Sign Up
+              {t("sign_up") || "Sign Up"}
             </Link>
           </div>
 
@@ -81,7 +97,7 @@ const Header = () => {
       {/* 🔴 Breaking News Bar */}
       <div className="bg-red-700 text-white overflow-hidden">
         <div className="animate-marquee-slow whitespace-nowrap py-2 font-semibold">
-          🔴 Breaking News: Nashik rain alert • City traffic update • Local elections • Sports highlights • Education news
+          {breakingNews}
         </div>
       </div>
 

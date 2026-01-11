@@ -1,14 +1,85 @@
 import { motion } from "framer-motion";
-import PostingSection from "../components/PostingSection";
+import { useLang } from "../context/LanguageContext";
+import VideoCard from "../components/VideoCard";
 
 const Homepage = () => {
+
+  const { t, lang } = useLang();
+
+  // Headlines differ based on language
+  const headlines = lang === "mr"
+    ? [
+        { tag: "ब्रेकिंग", title: "नाशिकमध्ये मुसळधार पावसामुळे वाहतूक ठप्प", desc: "खोल भागात पाणी साचल्याने IMD कडून यलो अलर्ट जारी." },
+        { tag: "राजकारण", title: "निवडणुकीपूर्वी स्थानिक नेत्यांची महत्त्वपूर्ण बैठक", desc: "पालिका निवडणुकीवर परिणाम होण्याची शक्यता." },
+        { tag: "शिक्षण", title: "शिक्षण विभागाने नवीन अभ्यासक्रम मार्गदर्शक सूचना जाहीर केल्या", desc: "शाळा व महाविद्यालयांना नियम लागू." },
+        { tag: "इव्हेंट्स", title: "नाशिकमध्ये सांस्कृतिक महोत्सवाला मोठी उत्स्फूर्त प्रतिसाद", desc: "महाराष्ट्रभरातील कलाकारांची सहभागिता." },
+        { tag: "तंत्रज्ञान", title: "नाशिक स्टार्टअपने सादर केले AI आधारित शेती अ‍ॅप", desc: "शेतकऱ्यांना उत्पन्न वाढीस मदत." },
+        { tag: "क्रीडा", title: "जिल्हास्तरीय क्रिकेट स्पर्धेला प्रारंभ", desc: "युवा खेळाडूंकडून दमदार कामगिरी." }
+      ]
+    : [
+        { tag: "Breaking", title: "Heavy Rainfall Disrupts Traffic in Nashik", desc: "IMD issues yellow alert as waterlogging reported in low-lying areas." },
+        { tag: "Politics", title: "Local Leaders Hold Meeting Ahead of Elections", desc: "Key decisions expected to impact upcoming municipal polls." },
+        { tag: "Education", title: "Education Department Releases New Academic Guidelines", desc: "Schools and colleges to follow revised curriculum rules." },
+        { tag: "Events", title: "Cultural Festival Attracts Large Crowd in Nashik", desc: "Artists from across Maharashtra perform at the annual event." },
+        { tag: "Technology", title: "Nashik Startup Launches AI-Based Farming App", desc: "The app aims to help farmers improve crop yield using AI." },
+        { tag: "Sports", title: "District-Level Cricket Tournament Begins Today", desc: "Young talents compete in the opening matches." }
+      ];
+
+  // 🎥 VIDEO NEWS (bilingual)
+  const videos = lang === "mr"
+  ? [
+      {
+        thumbnail: "https://img.youtube.com/vi/kS_c_KxWE8Y/maxresdefault.jpg",
+        title: "स्टार 24 फास्ट न्यूज – खास रिपोर्ट",
+        desc: "नाशिक आणि महाराष्ट्रातील महत्त्वाच्या घडामोडींचा आढावा.",
+        url: "https://youtu.be/kS_c_KxWE8Y"
+      },
+      {
+        thumbnail: "https://img.youtube.com/vi/mQwolKZUviY/maxresdefault.jpg",
+        title: "नाशिक शहरातील महत्वाच्या स्थानिक बातम्या",
+        desc: "घडामोडी, अपडेट्स आणि नागरिकांचा प्रतिसाद.",
+        url: "https://youtu.be/mQwolKZUviY"
+      },
+      {
+        thumbnail: "https://img.youtube.com/vi/orO2xCusQEM/maxresdefault.jpg",
+        title: "ताज्या घडामोडींचा सविस्तर आढावा",
+        desc: "स्टार 24 फास्ट न्यूज कडून विशेष रिपोर्ट.",
+        url: "https://youtu.be/orO2xCusQEM"
+      },
+      {
+        thumbnail: "https://img.youtube.com/vi/ltm-btPZ6xI/maxresdefault.jpg",
+        title: "महाराष्ट्रातील प्रमुख बातम्यांवर विश्लेषण",
+        desc: "घटनांमागील महत्वाचे पैलू समजून घ्या.",
+        url: "https://youtu.be/ltm-btPZ6xI"
+      }
+    ]
+  : [
+      {
+        thumbnail: "https://img.youtube.com/vi/kS_c_KxWE8Y/maxresdefault.jpg",
+        title: "Star 24 Fast News – Special Report",
+        desc: "Key updates and major developments from Nashik & Maharashtra.",
+        url: "https://youtu.be/kS_c_KxWE8Y"
+      },
+
+      {
+        thumbnail: "https://img.youtube.com/vi/orO2xCusQEM/maxresdefault.jpg",
+        title: "Detailed Coverage of Latest Developments",
+        desc: "Exclusive news update from Star 24 Fast News.",
+        url: "https://youtu.be/orO2xCusQEM"
+      },
+      {
+        thumbnail: "https://img.youtube.com/vi/ltm-btPZ6xI/maxresdefault.jpg",
+        title: "Key Headlines & Major State-Level Updates",
+        desc: "In-depth analysis and important insights.",
+        url: "https://youtu.be/ltm-btPZ6xI"
+      }
+    ];
+
+
   return (
     <main className="flex-1 bg-gray-100">
-      <section className="posting-section">
-        <div className="max-w-7xl mx-auto px-4 py-6 ">
-          <PostingSection />
-        </div>
-      </section>
+
+      
 
       {/* 🌟 HERO SECTION */}
       <section className="bg-white border-b border-blue-200">
@@ -20,10 +91,9 @@ const Homepage = () => {
             transition={{ duration: 0.6 }}
             className="text-4xl md:text-5xl font-extrabold text-blue-900 mb-4"
           >
-            Star <span className="text-red-600">24</span> Fast News
+            {t("Star")} <span className="text-red-600">24</span> {t("fast_news")}
           </motion.h1>
 
-          {/* Yellow Accent Line */}
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: "140px" }}
@@ -37,10 +107,9 @@ const Homepage = () => {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="text-lg text-gray-700 max-w-3xl mx-auto mb-6"
           >
-            Your trusted local news channel delivering fast, accurate, and
-            reliable updates from{" "}
-            <span className="font-semibold text-blue-800">Nashik</span>,
-            Maharashtra, India, and across the world.
+            {t("hero_desc1")}
+            <span className="font-semibold text-blue-800">{t("nashik")}</span>,
+            {t("maharashtra_india")}
           </motion.p>
 
           <motion.p
@@ -49,162 +118,73 @@ const Homepage = () => {
             transition={{ delay: 0.4, duration: 0.6 }}
             className="text-sm text-gray-600 max-w-2xl mx-auto mb-10"
           >
-            Covering breaking news, politics, crime, education, sports,
-            technology, and important local events —{" "}
-            <span className="text-red-600 font-semibold">
-              24×7 journalism
-            </span>{" "}
-            you can trust.
+            {t("hero_desc2")}{" "}
+            <span className="text-red-600 font-semibold">24×7</span>{" "}
+            {t("trusted_journalism")}
           </motion.p>
 
-          {/* 📊 STATS */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
-          >
-            <div className="bg-blue-50 border-t-4 border-blue-600 rounded-lg py-4">
-              <p className="text-2xl font-bold text-blue-900">24×7</p>
-              <p className="text-sm text-gray-700">News Coverage</p>
-            </div>
-
-            <div className="bg-yellow-50 border-t-4 border-yellow-400 rounded-lg py-4">
-              <p className="text-2xl font-bold text-yellow-600">100+</p>
-              <p className="text-sm text-gray-700">Local Stories</p>
-            </div>
-
-            <div className="bg-red-50 border-t-4 border-red-600 rounded-lg py-4">
-              <p className="text-2xl font-bold text-red-700">Trusted</p>
-              <p className="text-sm text-gray-700">Journalism</p>
-            </div>
-
-            <div className="bg-blue-50 border-t-4 border-blue-600 rounded-lg py-4">
-              <p className="text-2xl font-bold text-blue-900">Fast</p>
-              <p className="text-sm text-gray-700">Live Updates</p>
-            </div>
-          </motion.div>
-
         </div>
-      </section> 
+      </section>
 
       {/* 📰 LATEST HEADLINES */}
       <section className="px-6 py-12 max-w-6xl mx-auto">
+
         <h2 className="text-2xl font-bold text-blue-900 mb-6">
-          Latest Headlines
+          {t("latest_headlines")}
         </h2>
 
         <div className="grid gap-6 md:grid-cols-2">
 
-          {/* Breaking */}
-          <motion.article
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="bg-white p-6 rounded-lg shadow"
-          >
-            <span className="inline-block mb-2 text-xs font-semibold text-red-700 bg-red-100 px-2 py-1 rounded uppercase">
-              Breaking
-            </span>
-            <h3 className="text-lg font-bold mb-2 text-gray-900">
-              Heavy Rainfall Disrupts Traffic in Nashik
-            </h3>
-            <p className="text-gray-600">
-              IMD issues yellow alert as waterlogging reported in low-lying areas.
-            </p>
-          </motion.article>
+          {headlines.map((news, i) => (
+            <motion.article
+              key={i}
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 + i * 0.1 }}
+              className="bg-white p-6 rounded-lg shadow"
+            >
+              <span className="inline-block mb-2 text-xs font-semibold bg-gray-100 px-2 py-1 rounded uppercase">
+                {news.tag}
+              </span>
 
-          {/* Politics */}
-          <motion.article
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="bg-white p-6 rounded-lg shadow"
-          >
-            <span className="inline-block mb-2 text-xs font-semibold text-blue-700 bg-blue-100 px-2 py-1 rounded uppercase">
-              Politics
-            </span>
-            <h3 className="text-lg font-bold mb-2 text-gray-900">
-              Local Leaders Hold Meeting Ahead of Elections
-            </h3>
-            <p className="text-gray-600">
-              Key decisions expected to impact upcoming municipal polls.
-            </p>
-          </motion.article>
+              <h3 className="text-lg font-bold mb-2 text-gray-900">
+                {news.title}
+              </h3>
 
-          {/* Education */}
-          <motion.article
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="bg-white p-6 rounded-lg shadow"
-          >
-            <span className="inline-block mb-2 text-xs font-semibold text-yellow-700 bg-yellow-100 px-2 py-1 rounded uppercase">
-              Education
-            </span>
-            <h3 className="text-lg font-bold mb-2 text-gray-900">
-              Education Department Releases New Academic Guidelines
-            </h3>
-            <p className="text-gray-600">
-              Schools and colleges to follow revised curriculum rules.
-            </p>
-          </motion.article>
-
-          {/* Events */}
-          <motion.article
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="bg-white p-6 rounded-lg shadow"
-          >
-            <span className="inline-block mb-2 text-xs font-semibold text-green-700 bg-green-100 px-2 py-1 rounded uppercase">
-              Events
-            </span>
-            <h3 className="text-lg font-bold mb-2 text-gray-900">
-              Cultural Festival Attracts Large Crowd in Nashik
-            </h3>
-            <p className="text-gray-600">
-              Artists from across Maharashtra perform at the annual event.
-            </p>
-          </motion.article>
-
-          {/* Technology */}
-          <motion.article
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="bg-white p-6 rounded-lg shadow"
-          >
-            <span className="inline-block mb-2 text-xs font-semibold text-indigo-700 bg-indigo-100 px-2 py-1 rounded uppercase">
-              Technology
-            </span>
-            <h3 className="text-lg font-bold mb-2 text-gray-900">
-              Nashik Startup Launches AI-Based Farming App
-            </h3>
-            <p className="text-gray-600">
-              The app aims to help farmers improve crop yield using AI.
-            </p>
-          </motion.article>
-
-          {/* Sports */}
-          <motion.article
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9 }}
-            className="bg-white p-6 rounded-lg shadow"
-          >
-            <span className="inline-block mb-2 text-xs font-semibold text-orange-700 bg-orange-100 px-2 py-1 rounded uppercase">
-              Sports
-            </span>
-            <h3 className="text-lg font-bold mb-2 text-gray-900">
-              District-Level Cricket Tournament Begins Today
-            </h3>
-            <p className="text-gray-600">
-              Young talents compete in the opening matches.
-            </p>
-          </motion.article>
+              <p className="text-gray-600">
+                {news.desc}
+              </p>
+            </motion.article>
+          ))}
 
         </div>
+      </section>
+
+      {/* 🎥 VIDEO NEWS SECTION */}
+      <section className="px-6 py-12 max-w-6xl mx-auto">
+
+        <h2 className="text-2xl font-bold text-blue-900 mb-6">
+          {lang === "mr" ? "व्हिडिओ बातम्या" : "Video News"}
+        </h2>
+
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+          {videos.map((video, i) => (
+            <motion.a
+              key={i}
+              href={video.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 + i * 0.1 }}
+            >
+              <VideoCard video={video} />
+            </motion.a>
+          ))}
+
+        </div>
+
       </section>
 
     </main>

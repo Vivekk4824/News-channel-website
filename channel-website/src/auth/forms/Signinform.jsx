@@ -18,22 +18,37 @@ const Signinform = () => {
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  // ✅ UPDATED: real backend login
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setIsLoading(true);
 
-    setTimeout(() => {
-      if (
-        formData.email === "admin@star24.com" &&
-        formData.password === "123456"
-      ) {
-        navigate("/");
-      } else {
-        setError("Invalid email or password");
+    try {
+      const res = await fetch("http://localhost:3100/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || "Invalid email or password");
+        setIsLoading(false);
+        return;
       }
+
+      // ✅ Login success
+      navigate("/");
+
+    } catch (err) {
+      setError("Server error. Please try again.");
+    } finally {
       setIsLoading(false);
-    }, 1200);
+    }
   };
 
   return (
@@ -112,7 +127,7 @@ const Signinform = () => {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full bg-red-600 text-white py-3 rounded-lg text-lg font-bold hover:bg-red-700 transition"
+          className="w-full bg-red-600 text-white py-3 rounded-lg text-lg font-bold hover:bg-red-700 transition disabled:opacity-60"
         >
           {isLoading ? "Signing in..." : "Sign In"}
         </button>
