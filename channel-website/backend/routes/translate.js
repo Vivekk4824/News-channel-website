@@ -1,38 +1,44 @@
-import express from "express";
-// no import needed – Node 18+ has fetch built-in
+import dotenv from "dotenv";
+dotenv.config(); // Load .env here
 
+import express from "express";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const router = express.Router();
+
+// Check if API key is loaded
+console.log("Gemini Key Loaded:", process.env.GEMINI_API_KEY ? "YES" : "NO");
+
+// Initialize Gemini
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 router.post("/", async (req, res) => {
   const { text, targetLang } = req.body;
 
+  if (!text || !targetLang) {
+    return res.status(400).json({ error: "Text and targetLang are required" });
+  }
+
   try {
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [
-          {
-            role: "system",
-            content: `Translate this into ${targetLang}. Keep news style.`
-          },
-          {
-            role: "user",
-            content: text
-          }
-        ]
-      })
-    });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    const data = await response.json();
-    res.json({ translated: data.choices[0].message.content });
+    const prompt = `
+You are a professional news translator.
+Translate the following news into ${targetLang}.
+Keep tone formal and suitable for a news channel.
 
-  } catch (err) {
+News:
+${text}
+`;
+
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const translated = response.text();
+
+    res.json({ translated });
+
+  } catch (error) {
+    console.error("Gemini Error:", error);
     res.status(500).json({ error: "Translation failed" });
   }
 });

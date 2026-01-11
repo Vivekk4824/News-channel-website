@@ -5,6 +5,8 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 
 import authroute from "./routes/authroute.js";
+import translateRoute from "./routes/translate.js";
+
 import User from "./models/usermodel.js";
 
 dotenv.config();
@@ -44,6 +46,8 @@ mongoose
 
 // 🔹 Routes
 app.use("/api/auth", authroute);
+app.use("/api/translate", translateRoute);
+
 
 // 🔹 Start Server
 app.listen(3100, () => {
