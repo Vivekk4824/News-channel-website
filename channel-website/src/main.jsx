@@ -1,13 +1,17 @@
 import { StrictMode } from "react";
+import { Provider } from "react-redux";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import { LangProvider } from "./context/LanguageContext";
+import { store } from "./redux/store";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <LangProvider>
-      <App />
-    </LangProvider>
+    <Provider store={store}>
+      <LangProvider>
+        <App />
+      </LangProvider>
+    </Provider>
   </StrictMode>
 );

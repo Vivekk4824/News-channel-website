@@ -2,9 +2,20 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Mail, Lock, Eye, EyeOff, ArrowLeft, AlertCircle } from "lucide-react";
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../../redux/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Signinform = () => {
+  const dispatch = useDispatch(); 
   const navigate = useNavigate();
+
+    const user = useSelector((state) => state.user);
+  console.log("Redux state:", user);
+  
 
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -20,36 +31,36 @@ const Signinform = () => {
 
   // ✅ UPDATED: real backend login
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setIsLoading(true);
+  e.preventDefault();
+  setError("");
+  dispatch(signInStart());   // 🔵 login started
 
-    try {
-      const res = await fetch("http://localhost:3100/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
 
-      const data = await res.json();
+  try {
+    const res = await fetch("http://localhost:3100/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify(formData),
+    });
 
-      if (!res.ok) {
-        setError(data.message || "Invalid email or password");
-        setIsLoading(false);
-        return;
-      }
+    const data = await res.json();
 
-      // ✅ Login success
-      navigate("/");
-
-    } catch (err) {
-      setError("Server error. Please try again.");
-    } finally {
-      setIsLoading(false);
+    if (!res.ok) {
+      dispatch(signInFailure(data.message || "Login failed")); // 🔴 login failed
+      setError(data.message || "Invalid email or password");
+      return;
     }
-  };
+
+    dispatch(signInSuccess(data.user || data));
+  // 🟢 login success (store user)
+    navigate("/");
+  } catch (err) {
+    dispatch(signInFailure("Server error"));
+    setError("Server error. Please try again.");
+  }
+};
+
 
   return (
     <motion.div
@@ -76,6 +87,7 @@ const Signinform = () => {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
+      
         {/* Email */}
         <div>
           <label className="block text-base font-semibold mb-2">Email</label>
